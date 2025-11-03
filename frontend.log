@@ -1,0 +1,159 @@
+
+> volei-confirma-frontend@1.0.0 start
+> react-scripts start
+
+(node:23937) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:23937) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+Starting the development server...
+
+Compiled successfully!
+
+You can now view volei-confirma-frontend in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://192.168.23.128:3000
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+webpack compiled successfully
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/pages/Confirmations.js
+  Line 16:10:  'showMultiConfirmModal' is assigned a value but never used                                                                 no-unused-vars
+  Line 27:6:   React Hook useEffect has a missing dependency: 'loadEventConfirmations'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  Line 96:9:   'handleMultiConfirmPresence' is assigned a value but never used                                                            no-unused-vars
+  Line 121:9:  'handlePlayerSelection' is assigned a value but never used                                                                 no-unused-vars
+  Line 131:9:  'handleSelectAllPlayers' is assigned a value but never used                                                                no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/pages/Confirmations.js
+  Line 16:10:  'showMultiConfirmModal' is assigned a value but never used                                                                 no-unused-vars
+  Line 27:6:   React Hook useEffect has a missing dependency: 'loadEventConfirmations'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  Line 96:9:   'handleMultiConfirmPresence' is assigned a value but never used                                                            no-unused-vars
+  Line 121:9:  'handlePlayerSelection' is assigned a value but never used                                                                 no-unused-vars
+  Line 131:9:  'handleSelectAllPlayers' is assigned a value but never used                                                                no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/pages/Confirmations.js
+  Line 16:10:  'showMultiConfirmModal' is assigned a value but never used                                                                 no-unused-vars
+  Line 27:6:   React Hook useEffect has a missing dependency: 'loadEventConfirmations'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  Line 96:9:   'handleMultiConfirmPresence' is assigned a value but never used                                                            no-unused-vars
+  Line 121:9:  'handlePlayerSelection' is assigned a value but never used                                                                 no-unused-vars
+  Line 131:9:  'handleSelectAllPlayers' is assigned a value but never used                                                                no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/pages/Confirmations.js
+  Line 16:10:  'showMultiConfirmModal' is assigned a value but never used                                                                 no-unused-vars
+  Line 27:6:   React Hook useEffect has a missing dependency: 'loadEventConfirmations'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  Line 96:9:   'handleMultiConfirmPresence' is assigned a value but never used                                                            no-unused-vars
+  Line 121:9:  'handlePlayerSelection' is assigned a value but never used                                                                 no-unused-vars
+  Line 131:9:  'handleSelectAllPlayers' is assigned a value but never used                                                                no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/pages/Confirmations.js
+  Line 16:10:  'showMultiConfirmModal' is assigned a value but never used                                                                 no-unused-vars
+  Line 27:6:   React Hook useEffect has a missing dependency: 'loadEventConfirmations'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  Line 96:9:   'handleMultiConfirmPresence' is assigned a value but never used                                                            no-unused-vars
+  Line 121:9:  'handlePlayerSelection' is assigned a value but never used                                                                 no-unused-vars
+  Line 131:9:  'handleSelectAllPlayers' is assigned a value but never used                                                                no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/pages/Confirmations.js
+  Line 16:10:  'showMultiConfirmModal' is assigned a value but never used                                                                 no-unused-vars
+  Line 27:6:   React Hook useEffect has a missing dependency: 'loadEventConfirmations'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  Line 96:9:   'handleMultiConfirmPresence' is assigned a value but never used                                                            no-unused-vars
+  Line 121:9:  'handlePlayerSelection' is assigned a value but never used                                                                 no-unused-vars
+  Line 131:9:  'handleSelectAllPlayers' is assigned a value but never used                                                                no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/pages/Confirmations.js
+  Line 549:92:  'getLevelColor' is not defined  no-undef
+
+Search for the keywords to learn more about each error.
+WARNING in [eslint] 
+src/pages/Confirmations.js
+  Line 27:6:  React Hook useEffect has a missing dependency: 'loadEventConfirmations'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+ERROR in [eslint] 
+src/pages/Confirmations.js
+  Line 549:92:  'getLevelColor' is not defined  no-undef
+
+Search for the keywords to learn more about each error.
+
+webpack compiled with 1 error and 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/pages/Confirmations.js
+  Line 27:6:  React Hook useEffect has a missing dependency: 'loadEventConfirmations'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/pages/Confirmations.js
+  Line 27:6:  React Hook useEffect has a missing dependency: 'loadEventConfirmations'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/pages/Confirmations.js
+  Line 27:6:  React Hook useEffect has a missing dependency: 'loadEventConfirmations'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/pages/Confirmations.js
+  Line 27:6:  React Hook useEffect has a missing dependency: 'loadEventConfirmations'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/pages/Confirmations.js
+  Line 27:6:  React Hook useEffect has a missing dependency: 'loadEventConfirmations'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/pages/Dashboard.js
+  Line 2:46:  'TrendingUp' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/pages/Confirmations.js
+  Line 27:6:  React Hook useEffect has a missing dependency: 'loadEventConfirmations'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/pages/Dashboard.js
+  Line 2:46:  'TrendingUp' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning

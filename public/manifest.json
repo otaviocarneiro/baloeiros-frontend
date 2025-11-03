@@ -1,0 +1,21 @@
+{
+  "short_name": "Baloeiros",
+  "name": "Baloeiros - Gerenciamento de Times de Vôlei",
+  "icons": [
+    {
+      "src": "logo-baloeiros.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "logo-baloeiros.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#1e40af",
+  "background_color": "#ffffff",
+  "description": "App para gerenciamento de presença e sorteio de times de vôlei"
+}
