@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { UserCheck, Clock, Users, AlertCircle } from 'lucide-react';
+import { UserCheck, Clock, Users, AlertCircle, MessageSquare } from 'lucide-react';
 import { eventsAPI, confirmationsAPI, playersAPI } from '../services/api';
 import toast from 'react-hot-toast';
 
@@ -15,6 +15,8 @@ const Confirmations = () => {
   const [selectedPlayer, setSelectedPlayer] = useState('');
   const [showMultiConfirmModal, setShowMultiConfirmModal] = useState(false);
   const [selectedPlayers, setSelectedPlayers] = useState([]);
+  const [showWhatsAppModal, setShowWhatsAppModal] = useState(false);
+  const [whatsAppText, setWhatsAppText] = useState('');
 
   useEffect(() => {
     loadInitialData();
@@ -160,6 +162,131 @@ const Confirmations = () => {
     return timeString.slice(0, 5);
   };
 
+    const processWhatsAppList = (text) => {
+    // Quebrar texto em linhas e filtrar linhas vazias
+    const lines = text.split('\n').filter(line => line.trim());
+    const names = [];
+    
+    for (const line of lines) {
+      const cleanLine = line.trim();
+      
+      // Pular linhas que são títulos, emojis ou instruções
+      if (cleanLine.includes('🏐') || 
+          cleanLine.includes('Sáb.') || 
+          cleanLine.includes('Grupo') || 
+          cleanLine.includes('Espera') || 
+          cleanLine.includes('Convidados') ||
+          cleanLine.includes('Vôlei') ||
+          cleanLine === '' ||
+          cleanLine.length < 3) {
+        continue;
+      }
+      
+      // Extrair nome da linha numerada
+      // Formatos suportados: "01.Nome", "1.Nome", "14.nome / amigo outro"
+      const match = cleanLine.match(/^\d+\.\s*([^\/\n]+)/);
+      if (match) {
+        let name = match[1].trim();
+        
+        // Remover informações extras após o nome (como "/luis", "/david")
+        if (name.includes('/')) {
+          name = name.split('/')[0].trim();
+        }
+        
+        // Remover palavras como "amigo" se presentes
+        name = name.replace(/\s*amigo\s+\w+/i, '').trim();
+        
+        if (name && name.length > 1) {
+          names.push(name);
+        }
+      }
+    }
+    
+    return names;
+  };
+
+  const handleWhatsAppImport = async () => {
+    if (!selectedEvent) {
+      toast.error('Selecione um evento primeiro');
+      return;
+    }
+
+    const extractedNames = processWhatsAppList(whatsAppText);
+    
+    if (extractedNames.length === 0) {
+      toast.error('Nenhum nome foi encontrado na lista');
+      return;
+    }
+
+    // Encontrar jogadores correspondentes
+    const foundPlayers = [];
+    const notFoundNames = [];
+
+    extractedNames.forEach(name => {
+      const player = players.find(p => 
+        p.name.toLowerCase().includes(name.toLowerCase()) ||
+        name.toLowerCase().includes(p.name.toLowerCase())
+      );
+      
+      if (player) {
+        foundPlayers.push(player);
+      } else {
+        notFoundNames.push(name);
+      }
+    });
+
+    if (foundPlayers.length === 0) {
+      toast.error('Nenhum jogador cadastrado foi encontrado na lista');
+      return;
+    }
+
+    // Confirmar jogadores encontrados
+    try {
+      let successCount = 0;
+      let errorCount = 0;
+
+      for (const player of foundPlayers) {
+        try {
+          // Verificar se já não está confirmado
+          const alreadyConfirmed = confirmations.some(c => c.player_id === player.id);
+          if (!alreadyConfirmed) {
+            await confirmationsAPI.create({
+              event_id: selectedEvent.id,
+              player_id: player.id,
+              status: 'confirmed'
+            });
+            successCount++;
+          }
+        } catch (error) {
+          errorCount++;
+        }
+      }
+
+      if (successCount > 0) {
+        toast.success(`${successCount} jogador(es) confirmado(s) com sucesso!`);
+      }
+      
+      if (errorCount > 0) {
+        toast.error(`${errorCount} erro(s) ao confirmar jogadores`);
+      }
+
+      if (notFoundNames.length > 0) {
+        toast(`Nomes não encontrados: ${notFoundNames.join(', ')}`, {
+          duration: 6000,
+          icon: '⚠️'
+        });
+      }
+
+      loadEventConfirmations();
+      setShowWhatsAppModal(false);
+      setWhatsAppText('');
+      
+    } catch (error) {
+      console.error('Erro ao processar lista:', error);
+      toast.error('Erro ao processar lista do WhatsApp');
+    }
+  };
+
   const getAvailablePlayers = () => {
     const confirmedPlayerIds = confirmations.map(c => c.player_id);
     return players.filter(player => !confirmedPlayerIds.includes(player.id));
@@ -226,6 +353,15 @@ const Confirmations = () => {
           >
             <Users className="h-4 w-4 mr-2" />
             Confirmação Múltipla
+          </button>
+          
+          <button
+            onClick={() => setShowWhatsAppModal(true)}
+            className="btn-accent flex items-center"
+            disabled={!selectedEvent}
+          >
+            <MessageSquare className="h-4 w-4 mr-2" />
+            Importar WhatsApp
           </button>
         </div>
       </div>
@@ -592,6 +728,52 @@ const Confirmations = () => {
                     Confirmar {selectedPlayers.length} Presenças
                   </button>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* WhatsApp Import Modal */}
+      {showWhatsAppModal && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+          <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div className="mt-3">
+              <h3 className="text-lg font-bold text-gray-900 mb-4">Importar Lista do WhatsApp</h3>
+              
+              <div className="mb-4">
+                <label className="form-label mb-2">
+                  Cole a lista de confirmações do WhatsApp:
+                </label>
+                <textarea
+                  value={whatsAppText}
+                  onChange={(e) => setWhatsAppText(e.target.value)}
+                  placeholder="Ex:&#10;01.Rangel&#10;02.Eliel&#10;03.João&#10;04.Pedro"
+                  className="w-full h-40 p-3 border border-gray-300 rounded-lg"
+                  rows="10"
+                />
+                <p className="text-sm text-gray-500 mt-2">
+                  Formato esperado: "01.Nome", "02.Nome", etc.
+                </p>
+              </div>
+
+              <div className="flex justify-end space-x-3">
+                <button
+                  onClick={() => {
+                    setShowWhatsAppModal(false);
+                    setWhatsAppText('');
+                  }}
+                  className="btn-secondary"
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={handleWhatsAppImport}
+                  disabled={!whatsAppText.trim()}
+                  className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Importar Confirmações
+                </button>
               </div>
             </div>
           </div>
